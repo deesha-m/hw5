@@ -170,8 +170,12 @@ class AuditEntry(BaseModel):
     parent_agent: str | None = Field(description="Who delegated to this agent (None for the top-level agent).")
     chain: list[str] = Field(description="Full delegation path, e.g. ['boss', 'accounting'].")
     step: int = Field(description="Loop step within this agent's run (0 = start).")
-    event: Literal["run_start", "model_response", "tool_results", "run_end", "db_reset"] = Field(
-        description="db_reset is written by the dashboard's reset route, so resets are on the record too."
+    event: Literal["run_start", "model_response", "tool_results", "run_end", "db_reset", "db_restore"] = Field(
+        description="db_reset is written by the dashboard's reset route; db_restore records that the working "
+        "database was put back to an earlier saved state. Both keep changes to the data on the record."
+    )
+    restored_runs: list[str] | None = Field(
+        default=None, description="db_restore: the team runs whose results the restored database reflects."
     )
     task: str | None = Field(default=None, description="run_start: the task the agent was given.")
     database: str | None = Field(default=None, description="run_start of the top-level agent: which database file the MCP server used.")

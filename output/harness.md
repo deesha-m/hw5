@@ -671,3 +671,5 @@ The project is published at **https://github.com/deesha-m/hw5** (public), with t
   - starting the MCP server, the FastAPI backend and the React board;
   - resetting before a full three-ticket run, and the expected cash path ($3,400.00 → $2,560.00 → $160.00 → $160.00).
 
+**Restoring the graded state.** After publishing, the board was explored locally: a Fresh start, runs of 101 to 103 with no cheques signed, then another Fresh start. Those 5 entries stay in `output/audit_trail.json` (it's append-only). The working database was then restored to the graded Problem 9 state ($160.00, payments #1 and #2, all resolved), and that restore was logged as a `db_restore` entry. The entry names the three graded team runs (`3230eb222752`, `bf27741cfaf0`, `09b183793e0e`). The board treats a `db_restore` like a reset that keeps the runs it names, so the floor and shift reports show the graded runs again, locally and in a fresh clone.
+

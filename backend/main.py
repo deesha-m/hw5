@@ -103,17 +103,23 @@ def read_audit() -> list[dict[str, Any]]:
 
 def board_entries(entries: list[dict[str, Any]]) -> list[tuple[int, dict[str, Any]]]:
     """(position, entry) for runs that count on the board: after the last reset, and only
-    team runs against the working database (test runs on scratch copies are left out)."""
-    start = max((i for i, e in enumerate(entries) if e["event"] == "db_reset"), default=-1) + 1
+    team runs against the working database (test runs on scratch copies are left out).
+
+    A db_restore marker (the working database was put back to an earlier saved state)
+    works like a reset that keeps the runs it names, so their history shows again."""
+    marker = max((i for i, e in enumerate(entries) if e["event"] in ("db_reset", "db_restore")), default=-1)
+    start = marker + 1
+    kept = set(entries[marker].get("restored_runs") or []) if marker >= 0 else set()
     run_db = {
         e["team_run_id"]: project_path(e["database"]) if e.get("database") else None
-        for e in entries[start:]
+        for e in entries
         if e["event"] == "run_start" and not e.get("parent_agent")
     }
     working = project_path(WORKING_DB)
     return [
-        (i, e) for i, e in enumerate(entries[start:], start)
-        if e["event"] == "db_reset" or run_db.get(e["team_run_id"]) == working
+        (i, e) for i, e in enumerate(entries)
+        if (i >= marker and e["event"] in ("db_reset", "db_restore"))
+        or ((i >= start or e["team_run_id"] in kept) and run_db.get(e["team_run_id"]) == working)
     ]
 
 

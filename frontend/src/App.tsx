@@ -170,8 +170,11 @@ export default function App() {
     <div className="app">
       <header className="top">
         <div className="brand">
-          <span className="neon">Campus Customs</span>
-          <span className="sub">Back office · Chapel Street</span>
+          <span className="seal" aria-hidden>CC</span>
+          <span className="brand-text">
+            <span className="neon">Campus Customs</span>
+            <span className="sub">Back office · Chapel Street</span>
+          </span>
         </div>
         <div className="top-mid">
           <span className="chip-top">Desk date <b>{deskDate(cash?.as_of)}</b></span>

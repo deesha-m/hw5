@@ -138,5 +138,5 @@ Each run calls the model, which costs about 25k to 80k tokens per ticket. Exact 
 ## Notes
 
 - **Secrets:** the real `.env` is never committed (see `.gitignore`), and `.env.example` has placeholders only.
-- **Audit trail:** `output/audit_trail.json` is append-only. Every agent-loop step is added as it happens, and resets are logged as `db_reset`. Database paths in it are relative to this folder.
+- **Audit trail:** `output/audit_trail.json` is append-only. Every agent-loop step is added as it happens. Resets are logged as `db_reset`, and putting the working database back to a saved state is logged as `db_restore`. The board shows runs since the latest of those markers. Database paths in the log are relative to this folder.
 - **More detail:** `output/harness.md` has the tables, MCP tools, agents, routes, dashboard, safety rules, limits and the results of the graded run.

@@ -142,7 +142,16 @@ The agent also changed the backend so a ticket resolves when its run finishes, o
 
 ### Follow-up prompt
 
-No follow-up prompt was needed.
+Update the dashboard to match the aesthetic of the Homework 4 site: tech minimalist, Yale colors, modern.
+
+**What was lacking after the first prompt:** The black-and-pink neon desk didn't match the Campus Customs brand I'd built in Homework 4, so the storefront and the back office felt like two different shops.
+
+**Agent action:** The agent restyled the desk in the HW4 language, made more minimal:
+- ivory paper, hairline cards and Yale Blue as the one accent, with a "CC" seal and serif wordmark;
+- Cormorant Garamond, Inter, IBM Plex Mono and Caveat, plus Source Serif 4 for number-heavy text, because Cormorant only has old-style figures;
+- agent colors re-tuned for a light page (Yale Blue, brass, green, brick, light blue).
+
+The layout and features stayed the same. It rewrote `output/design.md`, retook the design screenshots, and opened the updated desk.
 
 ## Problem 9: Resolve the Tickets
 

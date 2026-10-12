@@ -13,23 +13,23 @@ export interface CrewMember {
 
 export const CREW: Record<Role, CrewMember> = {
   boss: {
-    role: 'boss', name: 'Boss', title: 'Store manager', glyph: '★', color: '#ff4fa3',
+    role: 'boss', name: 'Boss', title: 'Store manager', glyph: '★', color: '#00356b',
     voice: 'Calling the shots', idle: 'Waiting for a ticket',
   },
   inventory: {
-    role: 'inventory', name: 'Inventory', title: 'Stockroom', glyph: '▦', color: '#ffb84d',
+    role: 'inventory', name: 'Inventory', title: 'Stockroom', glyph: '▦', color: '#93703e',
     voice: 'Counting the shelf', idle: 'Stockroom quiet',
   },
   accounting: {
-    role: 'accounting', name: 'Accounting', title: 'Money & invoices', glyph: '$', color: '#5eead4',
+    role: 'accounting', name: 'Accounting', title: 'Money & invoices', glyph: '$', color: '#2f7d5b',
     voice: 'Running the numbers', idle: 'Ledger closed',
   },
   facilities: {
-    role: 'facilities', name: 'Facilities', title: 'Lease & landlord', glyph: '⌂', color: '#b69cff',
+    role: 'facilities', name: 'Facilities', title: 'Lease & landlord', glyph: '⌂', color: '#8c3b2c',
     voice: 'Checking the lease', idle: 'Keys on the hook',
   },
   customer_service: {
-    role: 'customer_service', name: 'Customer Service', title: 'Voice of the shop', glyph: '✉', color: '#7cc7ff',
+    role: 'customer_service', name: 'Customer Service', title: 'Voice of the shop', glyph: '✉', color: '#286dc0',
     voice: 'Writing to the customer', idle: 'Inbox clear',
   },
 }
@@ -37,7 +37,7 @@ export const CREW: Record<Role, CrewMember> = {
 export const ROLES: Role[] = ['boss', 'inventory', 'accounting', 'facilities', 'customer_service']
 
 export function crew(role: string): CrewMember {
-  return CREW[role as Role] ?? { ...CREW.boss, role: role as Role, name: role, glyph: '•', color: '#aaa' }
+  return CREW[role as Role] ?? { ...CREW.boss, role: role as Role, name: role, glyph: '•', color: '#857e72' }
 }
 
 // Plain-English verbs for the MCP tools, used in speech bubbles and the wire.
