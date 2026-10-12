@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Campus Customs: Resolved Board</title>
+<style>
+  :root { --bg:#08080a; --panel:#131318; --line:#26262f; --text:#f5f1f6; --muted:#9b95a1; --pink:#ff4fa3; --pink-soft:#ff9ccb; --ok:#6ee7a8; --warn:#ffc857; }
+  * { box-sizing: border-box; }
+  body { margin: 0; background: radial-gradient(1000px 500px at 10% -10%, rgba(255,79,163,.15), transparent 60%), var(--bg); color: var(--text);
+         font: 15px/1.6 -apple-system, BlinkMacSystemFont, "Segoe UI", Inter, Roboto, sans-serif; }
+  header { padding: 36px 44px 22px; border-bottom: 1px solid var(--line); }
+  .eyebrow { color: var(--pink); font-weight: 700; letter-spacing: .14em; text-transform: uppercase; font-size: 12px; }
+  h1 { margin: 6px 0; font-size: 30px; }
+  header p { margin: 0; color: var(--muted); max-width: 980px; }
+  .chips { display: flex; gap: 10px; flex-wrap: wrap; margin-top: 14px; }
+  .chip { border: 1px solid var(--line); background: var(--panel); border-radius: 999px; padding: 3px 12px; font-size: 13px; color: var(--muted); }
+  .chip b { color: var(--text); }
+  nav { position: sticky; top: 0; z-index: 3; display: flex; gap: 8px; padding: 12px 44px; background: rgba(8,8,10,.92); backdrop-filter: blur(6px); border-bottom: 1px solid var(--line); }
+  nav a { color: var(--muted); text-decoration: none; border: 1px solid var(--line); border-radius: 10px; padding: 6px 14px; font-weight: 600; }
+  nav a:hover { color: var(--text); border-color: var(--pink); }
+  main { padding: 26px 44px 60px; max-width: 1400px; }
+  section { margin-bottom: 54px; scroll-margin-top: 70px; }
+  .head { display: flex; align-items: baseline; gap: 14px; flex-wrap: wrap; }
+  h2 { margin: 0; font-size: 24px; }
+  .num { color: var(--pink); font-family: ui-monospace, Menlo, monospace; }
+  .stamp { font-family: ui-monospace, Menlo, monospace; font-weight: 800; letter-spacing: .14em; text-transform: uppercase; font-size: 12px; color: var(--pink); border: 2px solid var(--pink); border-radius: 6px; padding: 1px 8px; transform: rotate(-6deg); display: inline-block; }
+  .facts { display: grid; grid-template-columns: repeat(4, minmax(0,1fr)); gap: 10px; margin: 14px 0; }
+  @media (max-width: 900px) { .facts { grid-template-columns: 1fr 1fr; } main, header, nav { padding-left: 16px; padding-right: 16px; } }
+  .fact { background: var(--panel); border: 1px solid var(--line); border-radius: 12px; padding: 10px 14px; }
+  .fact span { display: block; font-size: 11px; color: var(--muted); text-transform: uppercase; letter-spacing: .1em; }
+  .fact b { font-size: 16px; }
+  .fact b.money { font-family: ui-monospace, Menlo, monospace; color: var(--pink-soft); }
+  .outcome { color: #ddd7e0; max-width: 1100px; }
+  figure { margin: 14px 0 0; background: var(--panel); border: 1px solid var(--line); border-radius: 14px; padding: 12px; }
+  figure img { width: 100%; display: block; border-radius: 8px; border: 1px solid var(--line); }
+  figcaption { color: var(--muted); font-size: 13px; padding: 10px 4px 2px; }
+  figcaption b { color: var(--text); }
+  .pair { display: grid; grid-template-columns: 2fr 1fr; gap: 14px; align-items: start; }
+  @media (max-width: 1000px) { .pair { grid-template-columns: 1fr; } }
+  .note { color: var(--muted); font-size: 13px; }
+  code { font-family: ui-monospace, Menlo, monospace; font-size: 13px; color: var(--pink-soft); }
+  footer { color: var(--muted); font-size: 13px; padding: 0 44px 40px; }
+</style>
+</head>
+<body>
+<header>
+  <div class="eyebrow">Campus Customs · Back-office desk · Problem 9</div>
+  <h1>Resolved Board: all three tickets</h1>
+  <p>Screenshots of the React dashboard (<code>frontend/</code>, <code>npm run dev</code>) taken in Chromium after the agent team resolved each ticket on a clean database. Each ticket shows the floor (who worked it), the shift report (what each agent did and the Boss's decision), and the cheque a human signed where money moved.</p>
+  <div class="chips">
+    <span class="chip">Reset on the board <b>2026-10-11 22:10:16 UTC</b></span>
+    <span class="chip">Checking start <b>$3,400.00</b></span>
+    <span class="chip">Checking end <b>$160.00</b></span>
+    <span class="chip">Model <b>gpt-6-luna</b></span>
+    <span class="chip">Human approver <b>Deesha Malpure</b></span>
+  </div>
+</header>
+
+<nav>
+  <a href="#start">Start</a>
+  <a href="#t101">#101 Bulldog tee</a>
+  <a href="#t102">#102 Rent due</a>
+  <a href="#t103">#103 Bulk hoodies</a>
+  <a href="#end">End</a>
+</nav>
+
+<main>
+  <section id="start">
+    <div class="head"><h2>Start: fresh database</h2></div>
+    <p class="outcome">After clicking <b>Fresh start</b>, all three tickets are open, nothing has been paid, and checking reads $3,400.00.</p>
+    <figure>
+      <img src="resolved_board_images/00_start.png" alt="Board after reset: three open tickets, checking $3,400.00">
+      <figcaption><b>Board at the start.</b> Three open stubs, an idle floor, the register at $3,400.00, nothing to sign.</figcaption>
+    </figure>
+  </section>
+
+  <section id="t101">
+    <div class="head"><h2><span class="num">#101</span> Bulldog tee · customer order</h2><span class="stamp">Resolved</span></div>
+    <div class="facts">
+      <div class="fact"><span>Agents</span><b>Boss → Inventory, Accounting, Customer Service</b></div>
+      <div class="fact"><span>Human approval</span><b>Invoice 501 · Deesha Malpure</b></div>
+      <div class="fact"><span>Cash</span><b class="money">$3,400.00 → $2,560.00</b></div>
+      <div class="fact"><span>Run</span><b>14 requests · 15 tool calls · 45k tokens</b></div>
+    </div>
+    <p class="outcome">Size S is sold out (0 on hand), and its reprint was blocked by overdue invoice 501 from Bulldog Print Co. Accounting prepared the exact $840.00 payment, the human signed it on the board, and the invoice is now paid. Earliest reprint: 2026-09-05. Customer Service drafted a reply offering M/L/XL now or waiting.</p>
+    <div class="pair">
+      <figure>
+        <img src="resolved_board_images/101_floor.png" alt="Ticket 101 floor after the run">
+        <figcaption><b>Floor.</b> Boss in the center, wired to Inventory, Accounting and Customer Service. Facilities stayed idle. Stub stamped RESOLVED, register $2,560.00, receipt line "#1 invoice 501 −$840.00 signed Deesha Malpure".</figcaption>
+      </figure>
+      <figure>
+        <img src="resolved_board_images/101_cheque.png" alt="Cheque for invoice 501">
+        <figcaption><b>The cheque the agents prepared:</b> Pay Bulldog Print Co $840.00 (eight hundred forty and 00/100), memo invoice 501, prepared by Accounting.</figcaption>
+      </figure>
+    </div>
+    <figure>
+      <img src="resolved_board_images/101_resolved.png" alt="Ticket 101 shift report">
+      <figcaption><b>Shift report.</b> The Boss's call with a "Signed by Deesha Malpure: $840.00 paid" line, a card per agent with its summary and MCP tools, facts with sources, and the draft letter to Tauhid.</figcaption>
+    </figure>
+  </section>
+
+  <section id="t102">
+    <div class="head"><h2><span class="num">#102</span> Rent due · rent notice</h2><span class="stamp">Resolved</span></div>
+    <div class="facts">
+      <div class="fact"><span>Agents</span><b>Boss → Facilities</b></div>
+      <div class="fact"><span>Human approval</span><b>Rent, lease 1 · Deesha Malpure</b></div>
+      <div class="fact"><span>Cash</span><b class="money">$2,560.00 → $160.00</b></div>
+      <div class="fact"><span>Run</span><b>8 requests · 10 tool calls · 24k tokens</b></div>
+    </div>
+    <p class="outcome">Facilities checked the emailed notice against lease 1: payee Elm City Properties, $2,400.00, due 2026-09-02, no bank-detail change, and not yet paid. It then prepared the payment. The Boss confirmed cash itself and warned it would leave $160.00, below the $500 cushion. The human signed anyway (rent first), so lease 1 is now next due 2026-10-02.</p>
+    <div class="pair">
+      <figure>
+        <img src="resolved_board_images/102_floor.png" alt="Ticket 102 floor after the run">
+        <figcaption><b>Floor.</b> Only the Boss and Facilities lit up. Register $160.00 in red with "Below $500 cushion", and two receipt lines.</figcaption>
+      </figure>
+      <figure>
+        <img src="resolved_board_images/102_cheque.png" alt="Cheque for rent">
+        <figcaption><b>The cheque:</b> Pay Elm City Properties $2,400.00, memo rent 1, prepared by Facilities. "Checking after: $160.00 · below the $500 cushion" in red.</figcaption>
+      </figure>
+    </div>
+    <figure>
+      <img src="resolved_board_images/102_resolved.png" alt="Ticket 102 shift report">
+      <figcaption><b>Shift report.</b> Signed &amp; paid. Two agents worked it; Inventory, Accounting and Customer Service were not needed.</figcaption>
+    </figure>
+  </section>
+
+  <section id="t103">
+    <div class="head"><h2><span class="num">#103</span> Bulk hoodie discount · price override</h2><span class="stamp">Resolved</span></div>
+    <div class="facts">
+      <div class="fact"><span>Agents</span><b>Boss → Inventory, Accounting (→ Inventory), Customer Service, Accounting</b></div>
+      <div class="fact"><span>Human approval</span><b>None needed (10% ≤ Boss limit)</b></div>
+      <div class="fact"><span>Cash</span><b class="money">$160.00 → $160.00</b></div>
+      <div class="fact"><span>Run</span><b>24 requests · 22 tool calls · 79k tokens</b></div>
+    </div>
+    <p class="outcome">Only 8 of the 20 size-M hoodies are in stock, but 32 are on hand across sizes. The Boss approved the standard 10% bulk offer: $52.20 each, $1,044.00 for 20 as a size mix, above the $22 cost. No money moved, and the ticket resolved when the run finished. The draft asks Yale AI Club to choose a size mix.</p>
+    <figure>
+      <img src="resolved_board_images/103_floor.png" alt="Ticket 103 floor after the run">
+      <figcaption><b>Floor.</b> Four desks lit, including the Accounting → Inventory wire, a direct hand-off between specialists. All three stubs stamped RESOLVED, 0 open, register $160.00.</figcaption>
+    </figure>
+    <figure>
+      <img src="resolved_board_images/103_resolved.png" alt="Ticket 103 shift report">
+      <figcaption><b>Shift report.</b> The Boss's 10% decision with stats, crew cards (Customer Service's refused hand-off back to the Boss is shown), facts with sources, and the draft letter to Yale AI Club.</figcaption>
+    </figure>
+  </section>
+
+  <section id="end">
+    <div class="head"><h2>End: all resolved</h2></div>
+    <p class="outcome">Checking ends at <b>$160.00</b> = $3,400.00 − $840.00 (invoice 501) − $2,400.00 (rent) − $0.00 (discount quote). This matches <code>cash_accounts.checking</code> in <code>data/campus_customs_new.db</code>. The full itemization is on the Cash tab of <code>desk_tickets.html</code>, and the data is in <code>resolved_tickets.json</code>.</p>
+    <figure>
+      <img src="resolved_board_images/99_end.png" alt="Board at the end with all tickets resolved">
+      <figcaption><b>Board at the end.</b> 0 open tickets, nothing to sign, register $160.00 below the cushion.</figcaption>
+    </figure>
+  </section>
+</main>
+
+<footer>Campus Customs · MGT 409 Homework 5 · Screenshots taken with Playwright (Chromium, 1600×1000) from the live board. Images are in <code>output/resolved_board_images/</code>.</footer>
+</body>
+</html>

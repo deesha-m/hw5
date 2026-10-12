@@ -1,0 +1,182 @@
+{
+  "description": "Smoke test of the campus-customs MCP server. Each tool was called by the vibe coder (Claude Code) over the live MCP connection configured in .mcp.json, then every returned value was checked against data/campus_customs_new.db with SQL.",
+  "vibe_coder": "Claude Code (desktop app), project MCP server 'campus-customs' from .mcp.json",
+  "mcp_server": "mcp_server/server.py (FastMCP, stdio)",
+  "database": "data/campus_customs_new.db",
+  "desk_date": "2026-08-31",
+  "tests": [
+    {
+      "ticket": 101,
+      "prompt": "Ticket 101: Tauhid Zaman wants 1 Classic Bulldog Tee (CC-TEE-WHITE) in size S. Use the campus-customs MCP server to check whether we can fill it from stock.",
+      "tool": "check_stock",
+      "mcp_tool_name": "mcp__campus-customs__check_stock",
+      "arguments": {
+        "sku": "CC-TEE-WHITE",
+        "size": "S",
+        "qty": 1
+      },
+      "tool_output": {
+        "sku": "CC-TEE-WHITE",
+        "name": "Classic Bulldog Tee",
+        "location": "Aisle B",
+        "as_of": "2026-08-31",
+        "sizes": [
+          {
+            "size": "S",
+            "qty": 0,
+            "sold_out": true
+          },
+          {
+            "size": "M",
+            "qty": 5,
+            "sold_out": false
+          },
+          {
+            "size": "L",
+            "qty": 3,
+            "sold_out": false
+          },
+          {
+            "size": "XL",
+            "qty": 2,
+            "sold_out": false
+          }
+        ],
+        "requested_size": "S",
+        "requested_size_qty": 0,
+        "requested_qty": 1,
+        "can_fill_from_stock": false,
+        "shortfall": 1
+      },
+      "db_check": {
+        "sql": "SELECT sku, name, size, qty, location FROM inventory WHERE sku = 'CC-TEE-WHITE' ORDER BY rowid; SELECT date_today FROM desk;",
+        "db_rows": [
+          {
+            "sku": "CC-TEE-WHITE",
+            "name": "Classic Bulldog Tee",
+            "size": "S",
+            "qty": 0,
+            "location": "Aisle B"
+          },
+          {
+            "sku": "CC-TEE-WHITE",
+            "name": "Classic Bulldog Tee",
+            "size": "M",
+            "qty": 5,
+            "location": "Aisle B"
+          },
+          {
+            "sku": "CC-TEE-WHITE",
+            "name": "Classic Bulldog Tee",
+            "size": "L",
+            "qty": 3,
+            "location": "Aisle B"
+          },
+          {
+            "sku": "CC-TEE-WHITE",
+            "name": "Classic Bulldog Tee",
+            "size": "XL",
+            "qty": 2,
+            "location": "Aisle B"
+          }
+        ],
+        "checks": {
+          "name matches inventory.name": true,
+          "location matches inventory.location": true,
+          "every size qty matches inventory.qty": true,
+          "size S qty is 0 in inventory": true,
+          "as_of matches desk.date_today": true
+        },
+        "matches_db": true
+      },
+      "what_it_shows": "Size S has 0 on hand, so ticket 101 can't be filled from the shelf (shortfall 1); M, L and XL are in stock."
+    },
+    {
+      "ticket": 102,
+      "prompt": "Ticket 102: Elm City Properties emailed that rent is due. Use the campus-customs MCP server to look up lease 1 so we can check the notice against the lease on file.",
+      "tool": "get_lease",
+      "mcp_tool_name": "mcp__campus-customs__get_lease",
+      "arguments": {
+        "lease_id": 1
+      },
+      "tool_output": {
+        "lease_id": 1,
+        "space_name": "Chapel Street shop",
+        "landlord": "Elm City Properties",
+        "monthly_rent": 2400,
+        "next_due": "2026-09-02",
+        "notes": null,
+        "as_of": "2026-08-31",
+        "days_until_due": 2
+      },
+      "db_check": {
+        "sql": "SELECT * FROM leases WHERE id = 1; SELECT date_today FROM desk;",
+        "db_rows": [
+          {
+            "id": 1,
+            "space_name": "Chapel Street shop",
+            "landlord": "Elm City Properties",
+            "monthly_rent": 2400.0,
+            "next_due": "2026-09-02",
+            "notes": null
+          }
+        ],
+        "checks": {
+          "space_name matches leases.space_name": true,
+          "landlord matches leases.landlord": true,
+          "monthly_rent matches leases.monthly_rent": true,
+          "next_due matches leases.next_due": true,
+          "notes matches leases.notes": true,
+          "as_of matches desk.date_today": true,
+          "days_until_due = next_due - desk.date_today": true
+        },
+        "matches_db": true
+      },
+      "what_it_shows": "The lease on file is $2,400 to Elm City Properties, due 2026-09-02, 2 days after the desk date, matching what the notice claims."
+    },
+    {
+      "ticket": 103,
+      "prompt": "Ticket 103: Yale AI Club wants 20 Basic Hoodie Big Yale (CC-HOOD-NAVY) with a bulk discount. Use the campus-customs MCP server to get the pricing for 20 so we know the full-price quote and the cost floor.",
+      "tool": "get_pricing",
+      "mcp_tool_name": "mcp__campus-customs__get_pricing",
+      "arguments": {
+        "sku": "CC-HOOD-NAVY",
+        "qty": 20
+      },
+      "tool_output": {
+        "sku": "CC-HOOD-NAVY",
+        "name": "Basic Hoodie Big Yale",
+        "unit_cost": 22,
+        "list_price": 58,
+        "margin_per_unit": 36,
+        "max_discount_pct_before_loss": 62.1,
+        "qty": 20,
+        "list_total": 1160,
+        "cost_total": 440
+      },
+      "db_check": {
+        "sql": "SELECT p.sku, p.unit_cost, p.list_price, (SELECT name FROM inventory i WHERE i.sku = p.sku LIMIT 1) AS name FROM pricing p WHERE p.sku = 'CC-HOOD-NAVY';",
+        "db_rows": [
+          {
+            "sku": "CC-HOOD-NAVY",
+            "unit_cost": 22.0,
+            "list_price": 58.0,
+            "name": "Basic Hoodie Big Yale"
+          }
+        ],
+        "checks": {
+          "unit_cost matches pricing.unit_cost": true,
+          "list_price matches pricing.list_price": true,
+          "name matches inventory.name": true,
+          "list_total = list_price x 20": true,
+          "cost_total = unit_cost x 20": true,
+          "margin_per_unit = list_price - unit_cost": true,
+          "max_discount_pct = margin / list_price": true
+        },
+        "matches_db": true
+      },
+      "what_it_shows": "20 hoodies are $1,160 at list and $440 at cost, so any discount must stay above $22 a unit (at most 62.1% off)."
+    }
+  ],
+  "all_match_db": true
+}

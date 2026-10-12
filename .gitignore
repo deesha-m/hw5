@@ -1,0 +1,23 @@
+# Secrets: never commit the real .env
+.env
+.env.*
+!.env.example
+
+# Python
+.venv/
+__pycache__/
+*.pyc
+
+# OS
+.DS_Store
+
+# Local Claude Code settings
+.claude/
+
+# Frontend
+frontend/node_modules/
+frontend/dist/
+
+# Local-only copies
+output/audit_trail.local.json
+*.db-journal

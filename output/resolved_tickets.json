@@ -1,0 +1,302 @@
+{
+  "homework": "MGT 409 Homework 5, Problem 9",
+  "model": "gpt-6-luna",
+  "database": "data/campus_customs_new.db",
+  "reset_before_run": "2026-10-11T22:10:16+00:00",
+  "starting_checking_balance": 3400.0,
+  "tickets": [
+    {
+      "ticket_id": 101,
+      "type": "customer_order",
+      "requester": "Tauhid Zaman",
+      "subject": "Bulldog tee",
+      "final_status": "resolved",
+      "boss_report_status": "waiting_on_approval",
+      "outcome": "Size S tee was sold out and its reprint was blocked by overdue invoice 501. Accounting prepared the exact $840.00 payment; a human approved it on the board, invoice 501 is now paid, and the reprint can arrive as early as 2026-09-05. Customer Service drafted a reply offering M/L/XL now or waiting.",
+      "team_run_id": "3230eb222752",
+      "run_started": "2026-10-11T22:10:19+00:00",
+      "run_finished": "2026-10-11T22:10:23+00:00",
+      "usage": {
+        "model_requests": 14,
+        "tool_calls": 15,
+        "tokens": 44993
+      },
+      "delegations_completed": 3,
+      "agents": [
+        {
+          "agent": "Boss",
+          "delegated_by": null,
+          "times_called": 1,
+          "delegated_to": [
+            "Inventory",
+            "Accounting",
+            "Customer Service"
+          ],
+          "mcp_tools": [
+            "get_ticket"
+          ],
+          "final_status": [
+            "waiting_on_approval"
+          ],
+          "contribution": "Size S is out of stock, and invoice 501 must be paid before its reprint can proceed; no payment was made because this run has no human approval. A human must approve the exact $840.00 invoice payment; if paid today, earliest delivery is September 5, 2026. The ticket remains waiting, and the customer can choose an available size or wait for the reprint."
+        },
+        {
+          "agent": "Inventory",
+          "delegated_by": "Boss",
+          "times_called": 1,
+          "delegated_to": [],
+          "mcp_tools": [
+            "get_ticket",
+            "check_stock",
+            "get_invoice"
+          ],
+          "final_status": [
+            "blocked"
+          ],
+          "contribution": "CC-TEE-WHITE size S is sold out: 0 on hand, so the order for 1 cannot be filled from stock. Invoice 501 for the reprint is open and 3 days overdue; if paid today, earliest delivery is 2026-09-05. Alternatives in Aisle B are 5 size M, 3 size L, and 2 size XL."
+        },
+        {
+          "agent": "Accounting",
+          "delegated_by": "Boss",
+          "times_called": 1,
+          "delegated_to": [],
+          "mcp_tools": [
+            "get_ticket",
+            "get_invoice",
+            "get_cash_balance",
+            "list_payments",
+            "list_vendors",
+            "update_ticket"
+          ],
+          "final_status": [
+            "waiting_on_approval"
+          ],
+          "contribution": "Invoice 501 is a valid, open and 3-days-overdue $840.00 charge from the listed vendor, with no payment recorded. Checking has $3,400.00; paying would leave $2,560.00, above the $500 low-cash threshold. No human approval exists for this run, so no payment was made; invoice payment is recommended because it unblocks the reprint, whose earliest delivery if paid today is 2026-09-05."
+        },
+        {
+          "agent": "Customer Service",
+          "delegated_by": "Boss",
+          "times_called": 1,
+          "delegated_to": [],
+          "mcp_tools": [
+            "get_ticket",
+            "update_ticket"
+          ],
+          "final_status": [
+            "done"
+          ],
+          "contribution": "Size S is unavailable, and the provided stock facts show M, L, and XL alternatives available. Drafted a friendly reply asking whether Tauhid would prefer an alternative size or wait for a reprint; any reprint timing remains conditional and is not promised."
+        }
+      ],
+      "agents_not_used": [
+        "Facilities"
+      ],
+      "human_approvals": [
+        {
+          "payment_id": 1,
+          "kind": "invoice",
+          "ref_id": 501,
+          "amount": 840.0,
+          "account": "checking",
+          "approved_by": "Deesha Malpure",
+          "paid_at": "2026-08-31",
+          "prepared_by": "Accounting"
+        }
+      ],
+      "cash_change": -840.0,
+      "customer_message_draft": "Hi Tauhid,\n\nThanks for reaching out about the Bulldog tee. We’re sold out of size S right now, but we have M, L, and XL available if you’d like to switch sizes. You can also wait for a reprint; if it proceeds, the earliest delivery estimate is September 5, and timing depends on the reprint. Would you prefer one of the available sizes or to wait? Please let us know, and the Campus Customs team will follow up.",
+      "next_steps": [
+        "Owner: approve or decline payment of invoice 501 ($840.00) in the dashboard.",
+        "Customer service: send the draft and confirm whether Tauhid wants an alternative size or to wait for the reprint."
+      ]
+    },
+    {
+      "ticket_id": 102,
+      "type": "rent_notice",
+      "requester": "Elm City Properties",
+      "subject": "Rent due",
+      "final_status": "resolved",
+      "boss_report_status": "waiting_on_approval",
+      "outcome": "Facilities verified the emailed rent notice against lease 1 (payee Elm City Properties, $2,400.00, due 2026-09-02, not yet paid) and prepared the payment. A human approved it on the board; lease 1 is now paid through and next due 2026-10-02. The Boss flagged that it leaves checking at $160.00, below the $500 cushion.",
+      "team_run_id": "bf27741cfaf0",
+      "run_started": "2026-10-11T22:10:34+00:00",
+      "run_finished": "2026-10-11T22:10:48+00:00",
+      "usage": {
+        "model_requests": 8,
+        "tool_calls": 10,
+        "tokens": 23846
+      },
+      "delegations_completed": 1,
+      "agents": [
+        {
+          "agent": "Boss",
+          "delegated_by": null,
+          "times_called": 1,
+          "delegated_to": [
+            "Facilities"
+          ],
+          "mcp_tools": [
+            "get_ticket",
+            "get_cash_balance",
+            "list_payments"
+          ],
+          "final_status": [
+            "waiting_on_approval"
+          ],
+          "contribution": "Facilities verified the rent notice against lease 1: Elm City Properties’ rent of $2,400 is due 2026-09-02. No payment was made because this run has no human approval for the payment; ticket 102 is waiting. Checking has $2,560, so paying would leave $160, below the $500 low-cash threshold."
+        },
+        {
+          "agent": "Facilities",
+          "delegated_by": "Boss",
+          "times_called": 1,
+          "delegated_to": [],
+          "mcp_tools": [
+            "get_ticket",
+            "get_lease",
+            "list_payments",
+            "get_cash_balance",
+            "update_ticket"
+          ],
+          "final_status": [
+            "waiting_on_approval"
+          ],
+          "contribution": "Ticket 102 matches lease 1 on payee and due timing: Elm City Properties, with rent due 2026-09-02 (2 days after the desk date). The notice gives no amount and mentions no bank-account change; the lease rent is $2,400.00. No rent payment for this due date appears in payment history. Checking has $2,560.00; no payment was made, and rent requires human approval."
+        }
+      ],
+      "agents_not_used": [
+        "Inventory",
+        "Accounting",
+        "Customer Service"
+      ],
+      "human_approvals": [
+        {
+          "payment_id": 2,
+          "kind": "rent",
+          "ref_id": 1,
+          "amount": 2400.0,
+          "account": "checking",
+          "approved_by": "Deesha Malpure",
+          "paid_at": "2026-08-31",
+          "prepared_by": "Facilities"
+        }
+      ],
+      "cash_change": -2400.0,
+      "customer_message_draft": null,
+      "next_steps": [
+        "Owner: review and approve lease 1 rent of $2,400 from the dashboard if appropriate; payment would leave $160 in checking, below the $500 threshold."
+      ]
+    },
+    {
+      "ticket_id": 103,
+      "type": "price_override",
+      "requester": "Yale AI Club",
+      "subject": "Bulk hoodie discount",
+      "final_status": "resolved",
+      "boss_report_status": "done",
+      "outcome": "Only 8 of 20 size M hoodies are in stock, but 32 are on hand across sizes. The Boss approved the standard 10% bulk offer within its authority: $52.20 each, $1,044.00 for 20 as a size mix (above the $22 cost). No money moved; the draft reply to Yale AI Club asks which size mix they want.",
+      "team_run_id": "09b183793e0e",
+      "run_started": "2026-10-11T22:11:00+00:00",
+      "run_finished": "2026-10-11T22:11:33+00:00",
+      "usage": {
+        "model_requests": 24,
+        "tool_calls": 22,
+        "tokens": 79015
+      },
+      "delegations_completed": 5,
+      "agents": [
+        {
+          "agent": "Boss",
+          "delegated_by": null,
+          "times_called": 1,
+          "delegated_to": [
+            "Inventory",
+            "Accounting",
+            "Customer Service",
+            "Accounting"
+          ],
+          "mcp_tools": [
+            "get_ticket",
+            "update_ticket"
+          ],
+          "final_status": [
+            "done"
+          ],
+          "contribution": "Ticket 103 can be offered at the standard 10% bulk rate for 20 navy hoodies, but the available stock cannot meet the request for 20 size M. A size mix can reach 20 units, and the discounted quote is $52.20 each ($1,044 total), above cost. The ticket is waiting for the customer to choose sizes; no order was placed and no message was sent."
+        },
+        {
+          "agent": "Inventory",
+          "delegated_by": "Boss",
+          "times_called": 2,
+          "delegated_to": [],
+          "mcp_tools": [
+            "get_ticket",
+            "check_stock"
+          ],
+          "final_status": [
+            "done",
+            "done"
+          ],
+          "contribution": "There are 8 CC-HOOD-NAVY hoodies in size M on hand, so only 8 of the requested 20 can be supplied in that size now; the shortfall is 12. The full size breakdown is S: 4, M: 8, L: 14, XL: 6 (32 total); alternatives are available in other sizes, but the requested-size shortfall cannot be filled from current stock. No restock or linked invoice was provided. | 8 size M hoodies are on hand in Aisle A; 8 of the requested 20 can be supplied now, leaving a shortfall of 12. Other sizes available are S: 4, L: 14, and XL: 6 (24 units total across those sizes)."
+        },
+        {
+          "agent": "Accounting",
+          "delegated_by": "Boss",
+          "times_called": 2,
+          "delegated_to": [
+            "Inventory"
+          ],
+          "mcp_tools": [
+            "get_ticket",
+            "get_pricing",
+            "quote_discount",
+            "update_ticket"
+          ],
+          "final_status": [
+            "done",
+            "done"
+          ],
+          "contribution": "Current stock allows supplying 8 of the 20 requested CC-HOOD-NAVY size M hoodies. At the 10% policy starting offer, the quote for those 8 is $52.20 each, $417.60 total, with $46.40 savings; it remains above cost at $30.20 margin per unit. The 12+ bulk threshold is not met for the quantity currently available in size M; a new quote should use the actual quantity supplied if more stock becomes available or the customer accepts a different size mix. | Quoted the standard 10% policy discount for 20 supplied CC-HOOD-NAVY hoodies. The discounted unit price is $52.20 and the total is $1,044.00; the quote is above cost, with a $30.20 margin per unit. Inventory's supplied size mix supports the quantity, but not 20 units in size M alone."
+        },
+        {
+          "agent": "Customer Service",
+          "delegated_by": "Boss",
+          "times_called": 1,
+          "delegated_to": [
+            "Boss"
+          ],
+          "mcp_tools": [
+            "get_ticket",
+            "check_stock",
+            "get_pricing",
+            "update_ticket"
+          ],
+          "final_status": [
+            "waiting_on_approval"
+          ],
+          "contribution": "Drafted a customer reply explaining that only 8 of the 20 requested size M hoodies are currently available, with other sizes available for a mix. The bulk discount decision is still pending with the manager, so no discount or price was offered.",
+          "refused_delegations": [
+            "Boss is already in the chain (boss → customer_service); that would loop."
+          ]
+        }
+      ],
+      "agents_not_used": [
+        "Facilities"
+      ],
+      "human_approvals": [],
+      "cash_change": 0,
+      "customer_message_draft": "Hi Yale AI Club,\n\nThanks for reaching out! We currently have 8 navy hoodies in size M, so we can’t fill all 20 in that size. We can supply 20 total using a size mix (we currently have 4 size S, 8 size M, 14 size L, and 6 size XL). For 20 units, the standard 10% bulk offer is $52.20 each, or $1,044 total. Let us know which size combination you’d like, and we can confirm availability for that selection.\n\nBest,\nThe Campus Customs team",
+      "next_steps": [
+        "Customer Service or the manager should follow up with the draft and ask which size mix the customer wants.",
+        "Once the customer confirms sizes, verify that the requested mix remains available before confirming the order."
+      ]
+    }
+  ],
+  "ending_checking_balance": 160.0,
+  "cash_check": {
+    "formula": "3400.00 - 840.00 - 2400.00 - 0.00",
+    "computed": 160.0,
+    "cash_accounts_checking": 160.0,
+    "matches": true
+  },
+  "audit_trail": "output/audit_trail.json (team_run_ids above)"
+}
