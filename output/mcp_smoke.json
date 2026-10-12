@@ -4,6 +4,7 @@
   "mcp_server": "mcp_server/server.py (FastMCP, stdio)",
   "database": "data/campus_customs_new.db",
   "desk_date": "2026-08-31",
+  "db_note": "Run in Problem 4, before any payments: at that time every tool output matched data/campus_customs_new.db (19/19 checks). check_stock and get_pricing still match the final working copy. get_lease no longer does, by design: in Problem 9 rent payment #2 ($2,400.00, lease 1) moved leases.next_due from 2026-09-02 to 2026-10-02 (see the Cash tab of output/desk_tickets.html). Running get_lease(1) against the original data/campus_customs.db still returns exactly the values recorded below (due 2026-09-02, 2 days after the 2026-08-31 desk date).",
   "tests": [
     {
       "ticket": 101,
